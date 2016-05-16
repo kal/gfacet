@@ -40,7 +40,7 @@ import mx.utils.ObjectUtil;
 import popup.ConfigSelectionEvent;
 import popup.ExpertSettings;
 import org.flashdevelop.utils.FlashConnect;
-import popup.StableAbout;
+//import popup.StableAbout;
 
 private var _model:MainMenuModel;
 
@@ -154,7 +154,7 @@ private function getQuery(userInput:String):String {
 	
 	var pattern:RegExp;
 	pattern = / /g;
-	userInput = userInput.replace(pattern, " 'and' ");
+	//userInput = userInput.replace(pattern, " 'and' ");
 	
 	var prefixes:String = "" +
 		"PREFIX owl: <http://www.w3.org/2002/07/owl#> " +
@@ -173,7 +173,7 @@ private function getQuery(userInput:String):String {
 	
 	
 	if (model.connection.config.isVirtuoso) {
-		query += "SELECT DISTINCT ?category ?label " +
+		query += "SELECT ?category ?label " +
 		"COUNT(?o) AS ?numOfInstances  " + 
 		"WHERE { " + //?category rdf:type skos:Concept . " +  
 				//"?o skos:subject ?category . " +
@@ -183,14 +183,14 @@ private function getQuery(userInput:String):String {
 				"FILTER (lang(?label) = 'en' || lang(?label) = '') " + 
 		"} ORDER BY DESC(?numOfInstances) LIMIT 30 ";
 	}else {
-		query += "SELECT DISTINCT ?category ?label " +
-		//"COUNT(?o) AS ?numOfInstances  " + 
+		query += "SELECT ?category ?label " +
+		"(COUNT(?o) AS ?numOfInstances) " + 
 		"WHERE { " + //?category rdf:type skos:Concept . " +  
 				"?o skos:subject ?category . " +
 				"?category rdfs:label ?label .  " +
-				"FILTER regex(?label, '" + userInput + "', 'i')  . } "; 
-				"FILTER (lang(?label) = 'en') " +
-		"} ORDER BY DESC(?label) LIMIT 30 ";
+				"FILTER regex(?label, '" + userInput + "', 'i')  . " + 
+				//"FILTER (lang(?label) = 'en') " +
+		"} GROUP BY ?category ?label ORDER BY DESC(?label) LIMIT 30 ";
 	}
 	
 	//FlashConnect.trace("Query: " + query);
@@ -278,5 +278,5 @@ public function createNavBar(numberOfPages:uint = 1, set:uint = 0):void {
 }
 
 private function infosClickHandler(event:MouseEvent):void {
-	var pop:StableAbout = PopUpManager.createPopUp(Application.application as DisplayObject, StableAbout) as StableAbout;
+	//var pop:StableAbout = PopUpManager.createPopUp(Application.application as DisplayObject, StableAbout) as StableAbout;
 }

@@ -12,8 +12,17 @@ import com.adobe.flex.extras.controls.springgraph.Item;
 import connection.MirroringConnection;
 import de.polygonal.ds.HashMap;
 import de.polygonal.ds.Iterator;
+
+import graphElements.Chain;
+import graphElements.Element;
+import graphElements.ElementClass;
+
+import graphElements.Facet;
 import graphElements.GraphModel;
+import graphElements.ListItem;
+import graphElements.MapItem;
 import graphElements.NoPagingListItem;
+import graphElements.RelationItem;
 
 [Bindable(event="GraphModelChange")]
 public function get model():GraphModel {

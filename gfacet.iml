@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="Flex" version="4">
+  <component name="FlexBuildConfigurationManager" active="gfacet">
+    <configurations>
+      <configuration name="gfacet" main-class="Main" output-file="gfacet.swf" output-folder="$MODULE_DIR$/bin">
+        <dependencies target-player="10">
+          <entries>
+            <entry library-id="aca56588-b119-49ce-adc2-16a5ecac0412">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-id="03ec6df0-b6b0-42cf-8faa-75bd6354ea50">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-id="3651c02a-6430-49d3-9376-8af5b3421bfb">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-name="as3ds" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-name="map_flex_1_16" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-name="nimerComponents" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-id="82d6058f-fb5a-4c32-afca-d1350a69a302">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-id="a8bc2638-f769-4766-abb8-dcfbeb8c77d5">
+              <dependency linkage="Merged" />
+            </entry>
+          </entries>
+          <sdk name="flex_sdk_3.6a" />
+        </dependencies>
+        <compiler-options />
+        <packaging-air-desktop />
+        <packaging-android />
+        <packaging-ios />
+      </configuration>
+    </configurations>
+    <compiler-options />
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="jdk" jdkName="flex_sdk_3.6a" jdkType="Flex SDK Type (new)" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library" exported="">
+      <library type="flex">
+        <properties id="aca56588-b119-49ce-adc2-16a5ecac0412" />
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/lib/SpringGraph" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library type="flex">
+        <properties id="03ec6df0-b6b0-42cf-8faa-75bd6354ea50" />
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/lib/FasterSearching" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library type="flex">
+        <properties id="3651c02a-6430-49d3-9376-8af5b3421bfb" />
+        <CLASSES>
+          <root url="file://C:/Program Files (x86)/FlashDevelop/Library/AS3/classes" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" exported="" name="as3ds" level="project" />
+    <orderEntry type="library" exported="" name="map_flex_1_16" level="project" />
+    <orderEntry type="library" exported="" name="nimerComponents" level="project" />
+    <orderEntry type="module-library" exported="">
+      <library type="flex">
+        <properties id="82d6058f-fb5a-4c32-afca-d1350a69a302" />
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/AutoComplete/AutoComplete.swc!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library type="flex">
+        <properties id="a8bc2638-f769-4766-abb8-dcfbeb8c77d5" />
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/lib/MatchComboBox" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+  </component>
+</module>

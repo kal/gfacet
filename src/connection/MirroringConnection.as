@@ -1126,8 +1126,8 @@ package connection {
 			
 			if (ar1.length > 0) {	//if elements are left
 				//TODO: sorting!!
-				var dataSortField:SortField = new SortField();
-				dataSortField.caseInsensitive = true;
+				var dataSortField:SortField = new SortField(null, true);
+				//dataSortField.caseInsensitive = true;
 				var mySort:Sort = new Sort();
 				
 				if (_orderingProp != null) {

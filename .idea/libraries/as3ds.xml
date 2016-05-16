@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="as3ds" type="flex">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/DataStructures/as3ds.swc!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

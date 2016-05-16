@@ -12,14 +12,18 @@ package connection {
 	import connection.config.IConfig;
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
-	import flash.utils.Dictionary;
+import flash.net.URLRequest;
+import flash.net.URLVariables;
+import flash.utils.Dictionary;
 	import mx.collections.ArrayCollection;
 	import mx.rpc.events.FaultEvent;
 	import connection.model.ConnectionModel;
 	import global.StatusModel;
 	import flash.system.Security;
-	
-	public class SPARQLConnection extends EventDispatcher implements IConnection {
+
+import mx.rpc.http.HTTPService;
+
+public class SPARQLConnection extends EventDispatcher implements IConnection {
 		public var host:String;
 		public var basicGraph:String;
 		public var resultFormat:String = "XML";
@@ -78,7 +82,7 @@ package connection {
 				useDefaultGraphURI:Boolean = true):SPARQLService {
 			
 			
-			//Alert.show(sparqlQueryString);
+			// Alert.show(sparqlQueryString);
 			
 			if (resultHandler == null) {
 				resultHandler = findRelations_Result;
@@ -99,6 +103,8 @@ package connection {
 			sparqlService.method = "GET";
 			sparqlService.contentType = contentType;
 			sparqlService.resultFormat = "text";
+			sparqlService.requestTimeout = 120;
+
 			sparqlService.addEventListener(SPARQLResultEvent.SPARQL_RESULT, resultHandler);
 			
 			if (errorHandler != null) {

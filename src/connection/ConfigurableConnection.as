@@ -343,7 +343,9 @@
 			this.tempNewFacet = _newFacet;
 			//first we have to get all the elements of the choosen elementClass! 
 			//TODO: build the query! And let the result be returned to addFacet_Result!
-			var query:String = "SELECT DISTINCT ";
+			var query:String = "PREFIX skos:<http://www.w3.org/2004/02/skos/core#> "+
+			"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "+
+			"SELECT DISTINCT ";
 			var parent:Facet = _newFacet.incomingFacet;
 			
 			if (parent != null) {	//if _newFacet is not root
@@ -352,16 +354,16 @@
 			query += "?validChild ?label_child ?comment_child "; /* ?allChild*/
 			query += "WHERE { ";
 			if (parent != null) {	//if _newFacet is not root
-				query += "?parent dcterms:subject <" + parent.elementClassId + "> . ";
-				query += "?parent <"+_newFacet.property.id+"> ?validChild. ";	//this number of validChild is restricted to only those that are related to the parent!
-				query += "?parent rdfs:label ?label_parent. FILTER (lang(?label_parent) = 'en' ) ";
+				query += "?parent skos:subject <" + parent.elementClassId + "> . ";
+				query += "?parent <"+_newFacet.property.id+"> ?validChild . ";	//this number of validChild is restricted to only those that are related to the parent!
+				query += "?parent rdfs:label ?label_parent . "; // FILTER (lang(?label_parent) = 'en' ) ";
 				query += "OPTIONAL {  ";
-				query += "?parent rdfs:comment ?comment_parent FILTER (lang(?comment_parent) = 'en' )";
+				query += "?parent rdfs:comment ?comment_parent . "; // FILTER (lang(?comment_parent) = 'en' )";
 				query += "}";
 			}
-			query += "?validChild dcterms:subject <" + _newFacet.elementClassId + "> . ";
+			query += "?validChild skos:subject <" + _newFacet.elementClassId + "> . ";
 			/*query += "?allChild skos:subject <" + _newFacet.elementClassId + "> . ";*/
-			query += "?validChild rdfs:label ?label_child. FILTER (lang(?label_child) = 'en' ) ";
+			query += "?validChild rdfs:label ?label_child. "; //FILTER (lang(?label_child) = 'en' ) ";
 			query += "OPTIONAL {  ";
 			query += "?validChild rdfs:comment ?comment_child FILTER (lang(?comment_child) = 'en' )";
 			query += "}} LIMIT 1000 OFFSET "+_offset;
@@ -917,8 +919,8 @@
 			
 			if (ar1.length > 0) {	//if elements are left
 				//TODO: sorting!!
-				var dataSortField:SortField = new SortField();
-				dataSortField.caseInsensitive = true;
+				var dataSortField:SortField = new SortField(null, true);
+				//dataSortField.caseInsensitive = true;
 				var mySort:Sort = new Sort();
 				
 				if (_orderingProp != null) {
@@ -982,32 +984,37 @@
 			
 		    tempElementClass = _elementClass;
 			//?type ?class 
-			var strQuery:String = "SELECT ?type ?class ?labelOfType ?labelOfClass COUNT(DISTINCT ?o) AS ?numOfInstances" +
-				  " WHERE { " +
-				  " ?s dcterms:subject <" + _elementClass.id + "> ." +
-				  " ?s ?type ?o ." +
-				  " ?o dcterms:subject ?class ." +
+			var strQuery:String = "PREFIX skos:<http://www.w3.org/2004/02/skos/core#>" +
+					"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
+					"SELECT ?type ?class ?labelOfType ?labelOfClass (COUNT(DISTINCT ?o) AS ?numOfInstances)" +
+					" WHERE { " +
+					" ?s skos:subject <" + _elementClass.id + "> ." +
+					" ?s ?type ?o ." +
+				  " ?o skos:subject ?class ." +
 				  //" ?o rdfs:label ?oLabel ." +
 				  //" {SELECT DISTINCT ?labelOfType ?labelOfClass WHERE { " +
 				  " ?type rdfs:label ?labelOfType ." +
 				  " ?class rdfs:label ?labelOfClass ." +
 				  //'FILTER (lang(?labelOfClass) = "en" && lang(?labelOfType) = "en")' +
-				  " FILTER (lang(?labelOfClass) = 'en') " +
+				  //" FILTER (lang(?labelOfClass) = 'en') " +
 				  //" }} " +
 				  //'FILTER (lang(?oLabel) = "en")' +
 				  //' FILTER (lang(?labelOfType) = "en") '+
-				  "} ORDER BY DESC(?numOfInstances) LIMIT 40";
+				  "} GROUP BY ?type ?class ?labelOfType ?labelOfClass " +
+					"ORDER BY DESC(?numOfInstances) LIMIT 40";
 			
 				  
 				  
 				  
 
 			//fast
-			var strQuery2:String = "SELECT ?type ?class ?labelOfType ?labelOfClass " +
+			var strQuery2:String = "PREFIX skos:<http://www.w3.org/2004/02/skos/core#>" +
+					"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
+					"SELECT ?type ?class ?labelOfType ?labelOfClass " +
 				  " WHERE { " +
-				  " ?s dcterms:subject <" + _elementClass.id + "> ." +
+				  " ?s skos:subject <" + _elementClass.id + "> ." +
 				  " ?s ?type ?o ." +
-				  " ?o dcterms:subject ?class ." +
+				  " ?o skos:subject ?class ." +
 				  //" ?o rdfs:label ?oLabel ." +
 				  " ?type rdfs:label ?labelOfType ." +
 				  " ?class rdfs:label ?labelOfClass " +

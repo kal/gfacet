@@ -9,7 +9,9 @@
  */ 
 
 package graphElements{
-	// Chain.as
+import flash.net.registerClassAlias;
+
+// Chain.as
 	
 	[RemoteClass(alias="com.flashdb.Facet")]
     

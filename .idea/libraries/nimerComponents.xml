@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="nimerComponents" type="flex">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/NimerComponents/nimerComponents.swc!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

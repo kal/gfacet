@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="map_flex_1_16" type="flex">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/GoogleMapsSDK/map_flex_1_16.swc!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

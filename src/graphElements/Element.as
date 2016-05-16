@@ -9,7 +9,9 @@
  */ 
 
 package graphElements{
-	// Element.as
+import com.hillelcoren.fasterSearching.AbstractObject;
+
+// Element.as
 	
 	[RemoteClass(alias="com.flashdb.Element")]
     

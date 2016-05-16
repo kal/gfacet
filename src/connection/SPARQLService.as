@@ -15,7 +15,8 @@ package connection
 	import mx.core.mx_internal;
 	import mx.messaging.events.MessageEvent;
 	import mx.rpc.AsyncToken;
-	import mx.rpc.http.HTTPService;
+import mx.rpc.events.ResultEvent;
+import mx.rpc.http.HTTPService;
 	
 	use namespace mx_internal;
 	
@@ -30,8 +31,15 @@ package connection
 		public function SPARQLService(rootURL:String = null, destination:String = null) 
 		{
 			super(rootURL, destination);
+			addEventListener("result", eventWrapper);
 		}
-		
+
+		private function eventWrapper(event:ResultEvent):void {
+			var resultEvent:SPARQLResultEvent = SPARQLResultEvent.createEvent(event.result, sources, executionTime, parsingInformations, null, event.message);
+			resultEvent.headers = _responseHeaders;
+			dispatchEvent(resultEvent);
+		}
+
 		public function get sources():ArrayCollection {
 			return _sources;
 		}
@@ -67,23 +75,23 @@ package connection
 		 *
 		 *  @private
 		 */
-		mx_internal override function resultHandler(event:MessageEvent):void
-		{
-			var token:AsyncToken = preHandle(event);
-			
-			//if the handler didn't give us something just bail
-			if (token == null)
-				return;
-				
-			if (processResult(event.message, token))
-			{
-				dispatchEvent(new Event(BINDING_RESULT));
-				var resultEvent:SPARQLResultEvent = SPARQLResultEvent.createEvent(_result, _sources, executionTime, _parsingInformations, token, event.message);
-				resultEvent.headers = _responseHeaders;
-				dispatchRpcEvent(resultEvent);
-			}
-			//no else, we assume process would have dispatched the faults if necessary
-		}
+//		mx_internal override function resultHandler(event:MessageEvent):void
+//		{
+//			var token:AsyncToken = preHandle(event);
+//
+//			//if the handler didn't give us something just bail
+//			if (token == null)
+//				return;
+//
+//			if (processResult(event.message, token))
+//			{
+//				dispatchEvent(new Event(BINDING_RESULT));
+//				var resultEvent:SPARQLResultEvent = SPARQLResultEvent.createEvent(_result, _sources, executionTime, _parsingInformations, token, event.message);
+//				resultEvent.headers = _responseHeaders;
+//				dispatchRpcEvent(resultEvent);
+//			}
+//			//no else, we assume process would have dispatched the faults if necessary
+//		}
 	}
 	
 }
